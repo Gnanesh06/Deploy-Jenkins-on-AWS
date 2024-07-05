@@ -1,0 +1,23 @@
+Deploying Jenkins on AWS
+1. First Create an ubuntu EC2 instance.
+2. Then, open terminal if using mac otherwise we can install MobaXtream or putty for windows.
+3. In terminal, type
+                  sudo apt update # used for update the package lists for packages that need upgrading, as well as new packages that have just come to the repositories
+4. Then to access the ubuntu using third party(terminal or MobaXtream or putty) which we have created using Ec2, type 
+                  ssh -i pemfilename.pem ubuntu@publicipadress
+5. To deploy jenkins, first we have to install java
+                  sudo apt install openjdk-11-jdk
+6. Then to install jenkins,
+                  sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+                  https://pkg.jenkins.io/debian/jenkins.io-2023.key
+                  echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+                  https://pkg.jenkins.io/debian binary/ | sudo tee \
+                  /etc/apt/sources.list.d/jenkins.list > /dev/null
+                  sudo apt-get update
+                  sudo apt-get install jenkins
+7. Then, got to aws ec2 instance later to security->security groups->edit inbound rules. In ibound rules add another one and set type as custom TCP, port range as 80:80 and source as Anywhere in the world-IPv4. Then click on save rules.
+8. After finishing all these, open a new tab and type
+                  https://publiidaddress:80:80
+9. Here, 80:80 means that you are mapping port 80 of the host machine to port 80 of the Jenkins container. This allows you to access Jenkins by navigating to http://localhost:80:80 on your web browser.
+10. Then to open the jenkins, copy the code on to the terminal and type "cat code" , then you will get a password.
+11. Copy that password and enter into the web browser, then you can able to access the jenkins server.
